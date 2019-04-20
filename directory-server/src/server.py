@@ -6,24 +6,7 @@ app = Flask(__name__)
 api = Api(app)
 
 # Create the database
-users = [
-    {
-        "name": "Rodrigo",
-        "age": 19,
-        "occupation": "Software Engineer"
-    },
-    {
-        "name": "Angel",
-        "age": 32,
-        "occupation": "Singer"
-    },
-    {
-        "name": "Jessica",
-        "age": 43,
-        "occupation": "Developer"
-    }
-]
-
+users = []
 
 # API endpoints
 class User(Resource):
@@ -31,7 +14,8 @@ class User(Resource):
         for user in users:
             if name == user["name"]:
                 return user, 200
-            return "User not found", 404
+
+        return "User not found", 404
 
     def post(sel, name):
         parser = reqparse.RequestParser()
