@@ -1,4 +1,5 @@
 from flask_restful import Resource, reqparse
+from flask import request, abort
 
 # Create the database
 chunkServers = []
@@ -18,17 +19,15 @@ class ChunkServer(Resource):
         return "Chunk server not found", 404
 
     def post(self, ip):
-        parser = reqparse.RequestParser()
-        parser.add_argument("port")
-        args = parser.parse_args()
+        postPort = request.headers.get('port')
 
         for chunkServer in chunkServers:
-            if ip == chunkServer["ip"] and args["port"] == chunkServer["port"]:
+            if ip == chunkServer["ip"] and postPort == chunkServer["port"]:
                 return "Chunk server with ip {} and port {} already exists".format(ip, chunkServer["port"]), 400
 
         new_chunk_server = {
             "ip": ip,
-            "port": args["port"]
+            "port": postPort
         }
         chunkServers.append(new_chunk_server)
         return new_chunk_server, 201
