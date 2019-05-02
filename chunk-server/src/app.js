@@ -1,11 +1,11 @@
 //Constant values
 const express = require('express')
 const ip = require('ip');
+const readline = require('readline');
 const app = express()
-const port = '3000'
 const https = require('https')
 const request = require('request')
-
+var port
 //Directory server values
 const directoryIp = '127.0.0.1'
 const directoryPort = 5000
@@ -28,14 +28,39 @@ function connectToDirectory(req, res) {
 
         //if chunk server already added
         if (response.statusCode == 400) {
-            res.send(response.body)
+            console.error(response.body)
         } else {
-            res.send('Chunk server added.')
+            console.log('Chunk server added.')
         }
-        console.log('statusCode: ${res.statusCode}')
         console.log(body)
     })
 }
 
-app.get('/', (req, res) => connectToDirectory(req, res))
-app.listen(port, () => console.log('http://localhost:${port}'))
+//Function to save directory's data
+function saveDirectorysData(req, res) {
+    console.log("Post received:" + req.get("data"))
+    res.end("data received")
+}
+
+//Request the server's port to the user
+function requestPort() {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+      
+      rl.question('What port does server should use? ', (answer) => {
+        port = answer  
+        console.log(`Port: ${answer}`);
+        configServer()
+        rl.close();
+      });
+}
+
+function configServer(){
+    connectToDirectory()
+    app.post('/post_data', (req, res) => saveDirectorysData(req, res))
+    app.listen(port, () => console.log('http://localhost:' + port))
+}
+
+requestPort()
