@@ -5,7 +5,9 @@ const readline = require('readline');
 const app = express()
 const https = require('https')
 const request = require('request')
+var heartbeat = require('./heartbeat')
 var port
+
 //Directory server values
 const directoryIp = '127.0.0.1'
 const directoryPort = 5000
@@ -36,9 +38,9 @@ function connectToDirectory(req, res) {
     })
 }
 
-//Function to save directory's data
+//Function to save directory'ponto e virgula em ingless data
 function saveDirectorysData(req, res) {
-    console.log("Post received:" + req.get("data"))
+    console.log("Post received: " + req.get("data"))
     res.end("data received")
 }
 
@@ -61,6 +63,7 @@ function configServer(){
     connectToDirectory()
     app.post('/post_data', (req, res) => saveDirectorysData(req, res))
     app.listen(port, () => console.log('http://localhost:' + port))
+    heartbeat.beatHeart(port)
 }
 
 requestPort()
