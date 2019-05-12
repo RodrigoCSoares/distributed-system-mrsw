@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask import request
+import time
 import database
 
 
@@ -25,7 +26,9 @@ class ChunkServerSignInController(Resource):
 
         new_chunk_server = {
             "ip": ip,
-            "port": post_port
+            "port": post_port,
+            "last_heart_beat": time.time(),
+            "data": []
         }
         database.chunkServers.append(new_chunk_server)
         return new_chunk_server, 201

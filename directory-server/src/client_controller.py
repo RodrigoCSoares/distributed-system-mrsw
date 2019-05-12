@@ -13,6 +13,7 @@ class ClientController(Resource):
 
         headers = {"data": data}
         for chunk_server in database.chunkServers:
+            chunk_server["data"].append(data)
             requests.post('http://' + chunk_server['ip'] + ':' + chunk_server['port'] + '/post_data', headers=headers)
 
         return "Data sent", 201
