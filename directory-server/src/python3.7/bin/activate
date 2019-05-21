@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/rodrigo/code/python/hello-distributed-system/directory-server/src/python3.7"
+VIRTUAL_ENV="/home/rodrigo/Code/python/distributed-system-mrsw/directory-server/src/python3.7"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

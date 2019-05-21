@@ -1,9 +1,9 @@
-#!/home/rodrigo/code/python/hello-distributed-system/directory-server/src/flask/bin/python
+#!/home/rodrigo/Code/python/distributed-system-mrsw/directory-server/src/python3.6/bin/python3.6
 # -*- coding: utf-8 -*-
 import re
 import sys
 
-from setuptools.command.easy_install import main
+from pip._internal import main
 
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])

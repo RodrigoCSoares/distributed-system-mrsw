@@ -1,4 +1,4 @@
-#!/home/rodrigo/code/python/hello-distributed-system/directory-server/src/flask/bin/python
+#!/home/rodrigo/Code/python/distributed-system-mrsw/directory-server/src/python3.6/bin/python
 
 import sys
 import getopt
